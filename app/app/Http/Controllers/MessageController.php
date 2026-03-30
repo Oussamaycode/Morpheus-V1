@@ -21,15 +21,21 @@ class MessageController extends Controller
      */
     public function store(StoreMessageRequest $request)
     {
-        //
+        $message=Message::create($request->validated());
+        return response()->json(['message'=>$message],201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Message $message)
+    public function show(Chat $chat,Message $message)
     {
-        //
+        $this->authorize('view',$chat);
+        if($message->chat_id!==$chat->id){
+            return response()->json(['error'=>'this message does not belong to this chat'],403);
+        }
+           
+        return response()->json(['message'=>$message,'chat'=>$chat],200);
     }
 
     /**
@@ -47,4 +53,6 @@ class MessageController extends Controller
     {
         //
     }
+
+
 }

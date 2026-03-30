@@ -11,9 +11,10 @@ class ChatController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $chat=Chat::with('messages')->findOrFail($id);
+        return response()->json(['chat'=>$chat],200);
     }
 
     /**
@@ -21,7 +22,9 @@ class ChatController extends Controller
      */
     public function store(StoreChatRequest $request)
     {
-        //
+        $chat=Chat::create(['name'=>$request->name,'owner_id'=>auth()->user()->id]);
+        $chat->users()->attach(auth()->user()->id());
+        return response()->json(['chat'=>$chat],201);
     }
 
     /**
@@ -47,4 +50,11 @@ class ChatController extends Controller
     {
         //
     }
+
+    public function addToChat(Chat $chat,User $user){
+        $this->authorize('addTochat',[$chat,$user]);
+        $chat->users()->attach($user->id);
+        return response()->json(['message'=>'User added']);
+    }
+
 }

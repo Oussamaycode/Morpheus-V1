@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('virtual_machines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('game_id')->constrained()->onDelete('cascade');
-            $table->string('duration');
-            $table->string('status');
+            $table->foreignId('plan_id')->constrained();
+            $table->string('public_ip');
+            $table->string('cpu');
+            $table->string('gpu');
+            $table->integer('storage');
+            $table->timestamp('expires_at');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('virtual_machines');
     }
 };

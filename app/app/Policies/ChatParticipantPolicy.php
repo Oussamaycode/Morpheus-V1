@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Chat;
 use App\Models\User;
+use App\Models\chatParticipant;
 use Illuminate\Auth\Access\Response;
 
-class ChatPolicy
+class ChatParticipantPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,9 +19,9 @@ class ChatPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Chat $chat): bool
+    public function view(User $user, chatParticipant $chatParticipant): bool
     {
-       return $chat->users()->where('user_id',$user->id)->exists();
+        return false;
     }
 
     /**
@@ -35,7 +35,7 @@ class ChatPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Chat $chat): bool
+    public function update(User $user, chatParticipant $chatParticipant): bool
     {
         return false;
     }
@@ -43,7 +43,7 @@ class ChatPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Chat $chat): bool
+    public function delete(User $user, chatParticipant $chatParticipant): bool
     {
         return false;
     }
@@ -51,7 +51,7 @@ class ChatPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Chat $chat): bool
+    public function restore(User $user, chatParticipant $chatParticipant): bool
     {
         return false;
     }
@@ -59,15 +59,8 @@ class ChatPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Chat $chat): bool
+    public function forceDelete(User $user, chatParticipant $chatParticipant): bool
     {
         return false;
     }
-
-    public function addToChat(User $user,Chat $chat){
-        if(auth()->user()->id!==$chat->owner_id)
-           return false;
-        return !$chat->users()->where('user_id',$user->id)->exists();
-    }
-
 }

@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plans', function (Blueprint $table) {
-           $table->id();
-           $table->string('type')->default('private');
-           $table->timestamps();
+        Schema::create('chats', function (Blueprint $table) {
+            $table->id();
+            $table->string('type')->default('private'); 
+            $table->foreignId('owner_id')->constrained('users');
+            $table->timestamps();
         });
     }
 

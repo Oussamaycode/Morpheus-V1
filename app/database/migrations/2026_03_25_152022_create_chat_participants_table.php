@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('virtual_machines', function (Blueprint $table) {
+        Schema::create('chat_participants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plan_id')->constrained()->onDelete('cascade');
-            $table->string('public_ip');
-            $table->string('cpu');
-            $table->string('gpu');
-            $table->integer('storage');
-            $table->timestamp('expires_at');
+            $table->boolean('is_banned')->default('false');
+            $table->foreignId('user_id');
+            $table->foreignId('chat_id');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('virtual_machines');
+        Schema::dropIfExists('chat_participants');
     }
 };

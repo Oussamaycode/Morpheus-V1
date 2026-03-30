@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('queues', function (Blueprint $table) {
             $table->id();
             $table->integer('position');
-            $table->foreignId('session_id')->constrained();
+            $table->foreignId('session_id')->constrained('game_sessions');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

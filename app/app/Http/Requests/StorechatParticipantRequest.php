@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMessageRequest extends FormRequest
+class StorechatParticipantRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -21,7 +21,8 @@ class StoreMessageRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [ 'content'=>['required','min:1','string'],
+        return [
+            //
         ];
     }
 }
