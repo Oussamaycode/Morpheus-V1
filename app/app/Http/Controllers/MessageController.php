@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Message;
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
-use App\Http\Models\Chat;
+use App\Models\Chat;
 
 class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index(Chat $chat)
     {
-        $messages=Chat::find($id)->with['messages']->get();
+        $messages=$chat->messages;
         return response()->json(["messages"=>$messages],200);
     }
 
