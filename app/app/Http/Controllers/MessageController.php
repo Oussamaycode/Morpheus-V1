@@ -12,9 +12,9 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Chat $chat)
+    public function index($id)
     {
-        $messages=$chat->messages;
+        $messages=Chat::find($id)->with['messages']->get();
         return response()->json(["messages"=>$messages],200);
     }
 
