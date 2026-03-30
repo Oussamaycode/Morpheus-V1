@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Chat;
 use App\Http\Requests\StoreChatRequest;
 use App\Http\Requests\UpdateChatRequest;
+use App\Models\User;
 
 class ChatController extends Controller
 {
@@ -23,7 +24,7 @@ class ChatController extends Controller
     public function store(StoreChatRequest $request)
     {
         $chat=Chat::create(['name'=>$request->name,'owner_id'=>auth()->user()->id]);
-        $chat->users()->attach(auth()->user()->id());
+        $chat->users()->attach(auth()->user()->id);
         return response()->json(['chat'=>$chat],201);
     }
 
