@@ -22,6 +22,8 @@ class StoreMessageRequest extends FormRequest
     public function rules(): array
     {
         return [ 'content'=>['required','min:1','string'],
+                 'user_id'=>['integer','required'],
+                 'chat_id'=>['integer','required']
         ];
     }
 }
