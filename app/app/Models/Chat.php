@@ -17,7 +17,7 @@ class Chat extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class,'chatParticipants'); 
+        return $this->belongsToMany(User::class,'chat_participants'); 
     }
 
     public function owner(){
