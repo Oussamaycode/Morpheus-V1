@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('type')->default('private'); 
             $table->foreignId('owner_id')->constrained('users');
             $table->timestamps();
