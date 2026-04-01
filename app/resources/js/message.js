@@ -6,11 +6,12 @@ chatForm.addEventListener('submit', function(e) {
     const message = document.getElementById('message-text').value;
 
 
-    fetch('http://localhost:8000/api/messages', {
+    fetch('http://127.0.0.1:8000/api/chats/1/messages', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Authorization':`Bearer`
         },
         body: JSON.stringify({
             content: message
