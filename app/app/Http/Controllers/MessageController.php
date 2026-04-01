@@ -23,7 +23,9 @@ class MessageController extends Controller
      */
     public function store(StoreMessageRequest $request)
     {
-        $message=Message::create($request->validated());
+        $data=$request->validated();
+        $data['user_id']=auth()->user()->id;
+        $message=Message::create($data);
         return response()->json(['message'=>$message],201);
     }
 
