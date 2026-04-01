@@ -6,7 +6,7 @@ chatForm.addEventListener('submit', function(e) {
     const message = document.getElementById('message-text').value;
 
 
-    fetch('http://127.0.0.1:8000/api/chats/{chat_id}/messages', {
+    fetch('http://127.0.0.1:8000/api/chats/1/messages', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ chatForm.addEventListener('submit', function(e) {
         },
         body: JSON.stringify({
             content: message,
-            chat_id:chat_id
+            chat_id:1
         })
     })
     .then(response => response.json())
