@@ -11,7 +11,7 @@ chatForm.addEventListener('submit', function(e) {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization':`Bearer`
+            'Authorization':`Bearer 2|ef7KcqyZfp27PAPbC8Xhx3hIcbqxpLv9IilA1ieM81eabc65`
         },
         body: JSON.stringify({
             content: message
