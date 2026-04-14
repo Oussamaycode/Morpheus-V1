@@ -49,21 +49,22 @@ class SessionController extends Controller
         //
     }
 
-    public function startSession(Request $request)
+    public function start()
     {
-        $user = auth()->user();
-        $game = $request->game;
-        $hostIp = 'YOUR_HOST_IP';
-
-        $response = Http::post("http://$hostIp:3000/start-game", [
-            'user' => $user->email,
-            'game' => $game
-        ])->json();
-
-        return response()->json([
-            'guest_key' => $response['guest_key'],
-            'message' => $response['message'],
-            'host_ip' => $hostIp
-        ]);
+        try {
+            $streamUrl = $this->vastAi->getSelkiesStreamUrl();
+ 
+            return response()->json([
+                'success'    => true,
+                'stream_url' => $streamUrl,
+                'message'    => 'Session ready. Connecting you to the game...',
+            ]);
+ 
+        } catch (RuntimeException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 503);
+        }
     }
 }
