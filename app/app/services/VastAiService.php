@@ -15,19 +15,14 @@ class VastAiService
         $this->apiKey = config('vastai.api_key');
     }
 
-    /**
-     * Find the first running instance on your account and return its Selkies stream URL.
-     * No instance ID needed — it's picked up automatically.
-     */
+
     public function getSelkiesStreamUrl(): string
     {
         $instance = $this->findRunningInstance();
         return $this->buildStreamUrl($instance);
     }
 
-    /**
-     * Check if any instance on your account is currently running.
-     */
+  
     public function isInstanceRunning(): bool
     {
         try {
@@ -37,10 +32,6 @@ class VastAiService
         }
     }
 
-    /**
-     * Fetch all instances and return the first one that is running.
-     * Throws if none are found.
-     */
     private function findRunningInstance(): array
     {
         $response = Http::withoutVerifying()
@@ -71,9 +62,6 @@ class VastAiService
         return $running;
     }
 
-    /**
-     * Build the Selkies HTTP stream URL from an instance array.
-     */
     private function buildStreamUrl(array $instance): string
     {
         $ip = $instance['public_ipaddr'] ?? null;
