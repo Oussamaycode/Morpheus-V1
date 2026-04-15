@@ -43,7 +43,7 @@ class VastAiService
      */
     private function findRunningInstance(): array
     {
-        $response = Http::withToken($this->apiKey)
+        $response = Http::withoutVerifying($this->apiKey)
             ->get("{$this->baseUrl}/instances/");
 
         if (!$response->successful()) {
