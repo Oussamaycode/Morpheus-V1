@@ -43,7 +43,10 @@ class VastAiService
      */
     private function findRunningInstance(): array
     {
-        $response = Http::withoutVerifying()->withHeaders(['Authorization'=>'Bearer' . env('VASTAI_API_KEY'),])
+        $response = Http::withoutVerifying()
+            ->withHeaders([
+                'Authorization' => 'Bearer ' . env('VASTAI_API_KEY'),
+            ])
             ->get("{$this->baseUrl}/instances/");
 
         if (!$response->successful()) {
@@ -55,18 +58,14 @@ class VastAiService
         $instances = $response->json('instances') ?? [];
 
         if (empty($instances)) {
-            throw new RuntimeException(
-                "No instances found on your Vast.ai account."
-            );
+            throw new RuntimeException("No instances found.");
         }
 
         $running = collect($instances)
             ->first(fn($i) => ($i['actual_status'] ?? '') === 'running');
 
         if (!$running) {
-            throw new RuntimeException(
-                "No running instance found. Please start your instance from the Vast.ai dashboard."
-            );
+            throw new RuntimeException("No running instance found.");
         }
 
         return $running;
