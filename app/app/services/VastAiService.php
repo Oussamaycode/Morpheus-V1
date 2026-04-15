@@ -78,6 +78,8 @@ class VastAiService
     {
         $ip = $instance['public_ipaddr'] ?? null;
 
+        \Log::info('Vast.ai ports', ['ports' => $instance['ports'] ?? 'none']);
+
         if (!$ip) {
             throw new RuntimeException(
                 "Running instance (ID: {$instance['id']}) has no public IP yet. Try again in a moment."
