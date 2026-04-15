@@ -86,8 +86,6 @@ class VastAiService
             );
         }
 
-        // Selkies listens on 8080 inside the container.
-        // Vast.ai maps it to a random public port exposed under ports["8080/tcp"][0]["HostPort"]
         $ports = $instance['ports'] ?? [];
         $mappedPort = $ports['6100/tcp'][0]['HostPort'] ?? null;
 
