@@ -72,6 +72,8 @@ class VastAiService
             );
         }
 
+        \Log::info('Vast.ai instance', ['instance' => $instance]);
+
         $ports = $instance['ports'] ?? [];
         $mappedPort = $ports['6100/tcp'][0]['HostPort'] ?? null;
 
