@@ -10,6 +10,8 @@ class Game extends Model
     /** @use HasFactory<\Database\Factories\GameFactory> */
     use HasFactory;
 
+    protected $fillable=['name','description','image'];
+
     public function users(){
         return $this->belongsToMany(User::class,'user_game');
     }
