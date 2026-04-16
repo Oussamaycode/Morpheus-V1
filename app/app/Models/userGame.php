@@ -9,4 +9,8 @@ class userGame extends Model
 {
     /** @use HasFactory<\Database\Factories\UserGameFactory> */
     use HasFactory;
+
+    public function user(){
+        return $this->belongsTo();
+    }
 }
