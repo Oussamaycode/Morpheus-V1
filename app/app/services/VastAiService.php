@@ -72,7 +72,7 @@ class VastAiService
             );
         }
 
-        \Log::info('Vast.ai instance', ['instance' => $instance]);
+        //\Log::info('Vast.ai instance', ['instance' => $instance]);
 
         $ports = $instance['ports'] ?? [];
         $mappedPort = $ports['6100/tcp'][0]['HostPort'] ?? null;
@@ -84,6 +84,10 @@ class VastAiService
             );
         }
 
-        return "http://{$ip}:{$mappedPort}";
+        $token = $instance['jupyter_token'] ?? null;
+
+        return $token
+            ? "http://{$ip}:{$mappedPort}/?token={$token}"
+            : "http://{$ip}:{$mappedPort}";
     }
 }
