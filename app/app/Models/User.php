@@ -60,5 +60,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Chat::class,'chat_participant');
     }
 
+    public function games(){
+        return $this->belongsToMany(Game::class,'user_game');
+    }
+
     
 }

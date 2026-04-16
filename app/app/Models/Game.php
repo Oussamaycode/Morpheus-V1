@@ -9,4 +9,8 @@ class Game extends Model
 {
     /** @use HasFactory<\Database\Factories\GameFactory> */
     use HasFactory;
+
+    public function users(){
+        return $this->belongsToMany(User::class,'user_game');
+    }
 }
