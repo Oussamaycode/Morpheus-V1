@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Session;
 use App\Http\Requests\StoreSessionRequest;
 use App\Http\Requests\UpdateSessionRequest;
-use App\Services\VastAiService;
 use Illuminate\Http\JsonResponse;
 use RuntimeException;
 
@@ -15,7 +14,6 @@ class SessionController extends Controller
      * Display a listing of the resource.
      */
 
-    public function __construct(private VastAiService $vastAi) {}
 
     
     public function index()
