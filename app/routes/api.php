@@ -21,5 +21,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/chats/{chatId}/messages', [MessageController::class, 'store'])->name('chats.messages.store');
     Route::get('/chats/{chatId}/messages/{messageId}', [MessageController::class, 'show'])->name('chats.messages.show');
     Route::get('/start', [SessionController::class, 'start']);
+    Route::get('/games/fetch', [GameController::class, 'fetchGames']);
 });
 
