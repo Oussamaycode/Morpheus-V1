@@ -47,4 +47,8 @@ class VirtualMachineController extends Controller
     {
         //
     }
+
+    public function assignToUser(){
+        
+    }
 }
