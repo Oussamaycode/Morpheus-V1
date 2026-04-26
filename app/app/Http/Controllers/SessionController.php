@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Session;
-use App\Http\Requests\StoreSessionRequest;
-use App\Http\Requests\UpdateSessionRequest;
-use Illuminate\Http\JsonResponse;
-use RuntimeException;
+ 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class SessionController extends Controller
 {
@@ -56,20 +54,31 @@ class SessionController extends Controller
 
     public function start()
     {
-        try {
-            $streamUrl = $this->vastAi->getSelkiesStreamUrl();
+        // Get all instances from Vast.ai
+        $response = Http::withoutVerifying()->withToken(env('VASTAI_API_KEY'))
+            ->get('https://console.vast.ai/api/v0/instances/');
  
-            return response()->json([
-                'success'    => true,
-                'stream_url' => $streamUrl,
-                'message'    => 'Session ready. Connecting you to the game...',
-            ]);
+        $instances = $response->json('instances') ?? [];
  
-        } catch (RuntimeException $e) {
+        // Find the one that is running
+        $instance = collect($instances)->first(
+            fn($i) => $i['actual_status'] === 'running'
+        );
+ 
+        if (!$instance) {
             return response()->json([
                 'success' => false,
-                'message' => $e->getMessage(),
+                'message' => 'No running instance found. Please start your instance from the Vast.ai dashboard.',
             ], 503);
         }
+ 
+        $ip    = $instance['public_ipaddr'];
+        $port  = $instance['ports']['6100/tcp'][0]['HostPort'];
+        $token = $instance['jupyter_token'];
+ 
+        return response()->json([
+            'success'    => true,
+            'stream_url' => "http://{$ip}:{$port}/?token={$token}",
+        ]);
     }
 }
