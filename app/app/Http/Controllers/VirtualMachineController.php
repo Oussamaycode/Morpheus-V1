@@ -21,7 +21,7 @@ class VirtualMachineController extends Controller
      */
     public function store(StoreVirtualMachineRequest $request)
     {
-        //
+        
     }
 
     /**
@@ -48,7 +48,5 @@ class VirtualMachineController extends Controller
         //
     }
 
-    public function (){
-
-    }
+   
 }
