@@ -9,4 +9,9 @@ class Plan extends Model
 {
     /** @use HasFactory<\Database\Factories\PlanFactory> */
     use HasFactory;
+
+    public function users(){
+        
+        return $this->hasMany(user::class);
+    }
 }

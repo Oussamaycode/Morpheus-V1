@@ -68,5 +68,9 @@ class User extends Authenticatable
         return $this->hasOne(virtualMachine::class);
     }
 
+    public function plan(){
+        return $this->hasOne(user::class);
+    }
+
     
 }
