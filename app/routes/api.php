@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\VirtualMachineController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
