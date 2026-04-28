@@ -54,31 +54,13 @@ class SessionController extends Controller
 
     public function start()
     {
-        // Get all instances from Vast.ai
-        $response = Http::withoutVerifying()->withToken(env('VASTAI_API_KEY'))
-            ->get('https://console.vast.ai/api/v0/instances/');
- 
-        $instances = $response->json('instances') ?? [];
- 
-        // Find the one that is running
-        $instance = collect($instances)->first(
-            fn($i) => $i['actual_status'] === 'running'
-        );
- 
-        if (!$instance) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No running instance found. Please start your instance from the Vast.ai dashboard.',
-            ], 503);
-        }
- 
+        $
         $ip    = $instance['public_ipaddr'];
         $port  = $instance['ports']['6100/tcp'][0]['HostPort'];
         $session_token = $instance['jupyter_token'];
  
         return response()->json([
-            'success'    => true,
             'stream_url' => "http://{$ip}:{$port}/?token={$session_token}",
-        ]);
+        200]);
     }
 }
