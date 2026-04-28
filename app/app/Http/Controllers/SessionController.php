@@ -54,8 +54,7 @@ class SessionController extends Controller
 
     public function start()
     {
-        $
-        $ip    = $instance['public_ipaddr'];
+        $ip=auth()->user()->virtualMachine()->ip;
         $port  = $instance['ports']['6100/tcp'][0]['HostPort'];
         $session_token = $instance['jupyter_token'];
  
