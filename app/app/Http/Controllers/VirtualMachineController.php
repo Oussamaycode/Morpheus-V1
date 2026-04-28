@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\VirtualMachine;
 use App\Http\Requests\StoreVirtualMachineRequest;
 use App\Http\Requests\UpdateVirtualMachineRequest;
+use Illuminate\Support\Facades\Http;
 
 class VirtualMachineController extends Controller
 {
@@ -30,7 +31,7 @@ class VirtualMachineController extends Controller
            
 
             $available = VirtualMachine::where('vast_instance_id', $instance['id'])->exists();
-            if ($availabe) {
+            if ($available) {
                 continue;
             }
 

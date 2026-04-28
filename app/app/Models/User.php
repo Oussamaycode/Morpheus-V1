@@ -64,5 +64,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Game::class,'user_game');
     }
 
+    public function virtualMachine(){
+        return $this->hasOne(virtualMachine::class);
+    }
+
     
 }
