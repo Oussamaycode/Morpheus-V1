@@ -54,9 +54,10 @@ class SessionController extends Controller
 
     public function start()
     {
+        $user=auth()->user();
         
         $response = Http::withoutVerifying()->withToken(env('VASTAI_API_KEY'))
-            ->get('https://console.vast.ai/api/v0/instances/');
+            ->get('https://console.vast.ai/api/v0/instances/{$user->virtualMachine->}');
  
         $instances = $response->json('instances') ?? [];
  
