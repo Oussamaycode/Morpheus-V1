@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('role')->default('player'); 
-            $table->string('steam_id')->nullable();   
+            $table->string('steam_id')->nullable(); 
+            $table->foreignId('plan_id');
             $table->timestamps();
         });
 
