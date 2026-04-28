@@ -21,7 +21,32 @@ class VirtualMachineController extends Controller
      */
     public function store(StoreVirtualMachineRequest $request)
     {
-        
+            
+        $response = Http::withoutVerifying()->withToken(env('VASTAI_API_KEY'))->get('https://console.vast.ai/api/v0/instances/');
+
+        $instances = $response->json('instances');
+
+        foreach ($instances as $instance) {
+           
+
+            $available = VirtualMachine::where('vast_instance_id', $instance['id'])->exists();
+            if ($availabe) {
+                continue;
+            }
+
+            $virtualMachine=VirtualMachine::create([
+                'vast_instance_id' => $instance['id'],
+                'plan_id'          => $request->plan_id,
+                'public_ip'        => $instance['public_ipaddr'],
+                'cpu'              => $instance['cpu_name'],
+                'gpu'              => $instance['gpu_name'],
+                'storage'          => $instance['disk_space'],
+                'user_id'          => $request->user_id,
+            ]);
+        }
+
+        return response()->json($virtualMachine,201);
+
     }
 
     /**

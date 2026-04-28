@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('virtual_machines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plan_id')->constrained();
             $table->string('public_ip');
             $table->string('cpu');
             $table->string('gpu');
             $table->integer('storage');
-            $table->timestamp('expires_at');
+            $table->string('vast_instance_id')->unique();
+            $table->foreignId('user_id')->constrained()->unique(); 
+            $table->foreignId('plan_id')->constrained();
             $table->timestamps();
         });
     }

@@ -74,11 +74,11 @@ class SessionController extends Controller
  
         $ip    = $instance['public_ipaddr'];
         $port  = $instance['ports']['6100/tcp'][0]['HostPort'];
-        $token = $instance['jupyter_token'];
+        $session_token = $instance['jupyter_token'];
  
         return response()->json([
             'success'    => true,
-            'stream_url' => "http://{$ip}:{$port}/?token={$token}",
+            'stream_url' => "http://{$ip}:{$port}/?token={$session_token}",
         ]);
     }
 }
