@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('game_id')->constrained();
-            $table->integer('duration')->duration(0);
-            $table->string('status');
+            $table->integer('duration')->default(0);
+            $table->string('status')->default('ongoing');
             $table->string('stream_url');
             $table->timestamps();
         });
