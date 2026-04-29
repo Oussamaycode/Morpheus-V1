@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('role')->default('player'); 
             $table->string('steam_id')->nullable(); 
-            $table->foreignId('plan_id');
+            $table->foreignId('plan_id')->nullable();
             $table->timestamps();
         });
 
