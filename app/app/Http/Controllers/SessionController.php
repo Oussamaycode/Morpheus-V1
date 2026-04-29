@@ -57,21 +57,11 @@ class SessionController extends Controller
         $user=auth()->user();
         
         $response = Http::withoutVerifying()->withToken(env('VASTAI_API_KEY'))
-            ->get('https://console.vast.ai/api/v0/instances/{$user->virtualMachine->}');
+            ->get('https://console.vast.ai/api/v0/instances/{$user->virtualMachine->vast_instance_id}');
  
-        $instances = $response->json('instances') ?? [];
- 
-        // Find the one that is running
-        $instance = collect($instances)->first(
-            fn($i) => $i['actual_status'] === 'running'
-        );
- 
-        if (!$instance) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No running instance found. Please start your instance from the Vast.ai dashboard.',
-            ], 503);
-        }
+        $instance = $response->json('instance');
+
+        $session=Session::create['strelm'];
  
         $ip    = $instance['public_ipaddr'];
         $port  = $instance['ports']['6100/tcp'][0]['HostPort'];
