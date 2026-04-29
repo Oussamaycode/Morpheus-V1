@@ -14,6 +14,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
+Route::get('/plans', [PlanController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/chats', [ChatController::class, 'index'])->name('chats.index');
