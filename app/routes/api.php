@@ -24,6 +24,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/start', [gameSessionController::class, 'start']);
     Route::get('/games/fetch', [GameController::class, 'fetchGames']);
     Route::post('buy-plan',[VirtualMachineController::class,'store']);
-    Route::get('session/start',[gameSessionController::class,'store']);
+    Route::post('session/start',[gameSessionController::class,'store']);
 });
 
