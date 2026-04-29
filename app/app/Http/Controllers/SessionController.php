@@ -23,11 +23,6 @@ class SessionController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     */
-    public function store(StoreSessionRequest $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -53,7 +48,7 @@ class SessionController extends Controller
         //
     }
 
-    public function start()
+    public function store(StoreSessionRequest $request)
     {
         $user=auth()->user();
         
@@ -71,6 +66,8 @@ class SessionController extends Controller
 
         $session = Session::create([
             'stream_url' => "http://{$ip}:{$port}/?token={$session_token}",
+            'game_id'=>$request->game_id,
+            'user_id'=>$user->id,
         ]);
  
         return response()->json([

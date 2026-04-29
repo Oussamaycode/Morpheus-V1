@@ -9,4 +9,6 @@ class Session extends Model
 {
     /** @use HasFactory<\Database\Factories\SessionFactory> */
     use HasFactory;
+
+    protected $fillable=['game_id','user_id','stream_url','duration'];
 }
