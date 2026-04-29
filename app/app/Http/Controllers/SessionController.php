@@ -60,9 +60,9 @@ class SessionController extends Controller
         $response = Http::withoutVerifying()->withToken(env('VASTAI_API_KEY'))
             ->get("https://console.vast.ai/api/v0/instances/{$user->virtualMachine->vast_instance_id}");
             
-        return $response->json();
+        //return $response->json();
  
-        $instance = $response->json('instance');
+        $instance = $response->json('instances');
 
  
         $ip    = $instance['public_ipaddr'];
