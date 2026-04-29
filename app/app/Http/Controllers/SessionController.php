@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\Session;
 
 class SessionController extends Controller
 {
@@ -57,15 +58,17 @@ class SessionController extends Controller
         $user=auth()->user();
         
         $response = Http::withoutVerifying()->withToken(env('VASTAI_API_KEY'))
-            ->get('https://console.vast.ai/api/v0/instances/{$user->virtualMachine->vast_instance_id}');
+            ->get("https://console.vast.ai/api/v0/instances/{$user->virtualMachine->vast_instance_id}");
  
         $instance = $response->json('instance');
-
-        $session=Session::create['strelm'];
  
         $ip    = $instance['public_ipaddr'];
         $port  = $instance['ports']['6100/tcp'][0]['HostPort'];
         $session_token = $instance['jupyter_token'];
+
+        $session = Session::create([
+            'stream_url' => "http://{$ip}:{$port}/?token={$session_token}",
+        ]);
  
         return response()->json([
             'success'    => true,
