@@ -6,8 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Session;
+use App\Http\Requests\StoreGameSessionRequest;
 
-class SessionController extends Controller
+class gameSessionController extends Controller
 {
     /**
      * Display a listing of the resource.
