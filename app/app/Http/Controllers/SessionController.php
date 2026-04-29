@@ -71,8 +71,7 @@ class SessionController extends Controller
         ]);
  
         return response()->json([
-            'success'    => true,
-            'stream_url' => "http://{$ip}:{$port}/?token={$session_token}",
+            'stream_url' => "http://{$ip}:{$port}/?token={$session_token}",200
         ]);
     }
 }
