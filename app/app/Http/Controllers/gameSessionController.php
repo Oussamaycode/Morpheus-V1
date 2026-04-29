@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use App\Models\Session;
+use App\Models\gameSession;
 use App\Http\Requests\StoreGameSessionRequest;
 
 class gameSessionController extends Controller
@@ -28,7 +28,7 @@ class gameSessionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Session $session)
+    public function show(gameSession $session)
     {
         //
     }
@@ -36,7 +36,7 @@ class gameSessionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSessionRequest $request, Session $session)
+    public function update(UpdateGameSessionRequest $request, Session $session)
     {
         //
     }
@@ -44,12 +44,12 @@ class gameSessionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Session $session)
+    public function destroy(gameSession $session)
     {
         //
     }
 
-    public function store(StoreSessionRequest $request)
+    public function store(StoreGameSessionRequest $request)
     {
         $user=auth()->user();
         
@@ -65,7 +65,7 @@ class gameSessionController extends Controller
         $port  = $instance['ports']['6100/tcp'][0]['HostPort'];
         $session_token = $instance['jupyter_token'];
 
-        $session = Session::create([
+        $session = gameSession::create([
             'stream_url' => "http://{$ip}:{$port}/?token={$session_token}",
             'game_id'=>$request->game_id,
             'user_id'=>$user->id,
