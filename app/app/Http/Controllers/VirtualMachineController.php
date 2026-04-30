@@ -42,7 +42,7 @@ class VirtualMachineController extends Controller
                 'cpu'              => $instance['cpu_name'],
                 'gpu'              => $instance['gpu_name'],
                 'storage'          => $instance['disk_space'],
-                'user_id'          => $request->user_id,
+                'user_id'          => auth()->user()->id,
             ]);
         }
 
