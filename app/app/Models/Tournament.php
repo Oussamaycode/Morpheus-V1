@@ -10,5 +10,5 @@ class Tournament extends Model
     /** @use HasFactory<\Database\Factories\TournamentFactory> */
     use HasFactory;
 
-    protected $fillable=[''];
+    protected $fillable=['name','game_id','start_date','status'];
 }
