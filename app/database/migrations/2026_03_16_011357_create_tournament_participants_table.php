@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('tournament_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->integer('position')->nullable();
+            $table->integer('score')->nullable();
             $table->timestamps();
         });
     }
