@@ -9,4 +9,6 @@ class TournamentParticipant extends Model
 {
     /** @use HasFactory<\Database\Factories\TournamentParticipantFactory> */
     use HasFactory;
+
+    protected $fillable=[''];
 }
