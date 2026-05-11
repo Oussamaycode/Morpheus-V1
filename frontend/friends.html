@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friends - Morpheus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#76b900',
+            'primary-hover': '#5aa700',
+            background: '#0f0f0f',
+            surface: '#1a1a1a',
+            accent: '#2a2a2a',
+            border: '#404040',
+            'text-muted': '#b0b0b0'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-white min-h-screen">
+  <!-- Navbar -->
+  <nav class="bg-surface border-b border-accent py-4 sticky top-0 z-10">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
+      <a href="index.html" class="text-xl font-bold text-primary">Morpheus</a>
+      
+      <ul class="hidden md:flex gap-6 list-none">
+        <li><a href="index.html" class="text-white font-medium hover:text-primary">Home</a></li>
+        <li><a href="games.html" class="text-white font-medium hover:text-primary">Games</a></li>
+        <li><a href="chat.html" class="text-white font-medium hover:text-primary">Chat</a></li>
+        <li><a href="friends.html" class="text-white font-medium hover:text-primary">Friends</a></li>
+        <li><a href="buy-plan.html" class="text-white font-medium hover:text-primary">Buy Plan</a></li>
+        <li><a href="tournament.html" class="text-white font-medium hover:text-primary">Tournaments</a></li>
+        <li><a href="profile.html" class="text-white font-medium hover:text-primary">Profile</a></li>
+        <li><a href="login.html" class="text-white font-medium hover:text-primary">Logout</a></li>
+      </ul>
+      
+      <div class="flex flex-col gap-1 cursor-pointer p-2 md:hidden" onclick="toggleMenu()">
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+      </div>
+    </div>
+    
+    <div class="hidden absolute top-full left-0 right-0 bg-surface border-b border-accent py-4" id="mobile-menu">
+      <a href="index.html" class="block py-4 text-white border-b border-accent">Home</a>
+      <a href="games.html" class="block py-4 text-white border-b border-accent">Games</a>
+      <a href="queue.html" class="block py-4 text-white border-b border-accent">Queue</a>
+      <a href="chat.html" class="block py-4 text-white border-b border-accent">Chat</a>
+      <a href="friends.html" class="block py-4 text-white border-b border-accent">Friends</a>
+      <a href="buy-plan.html" class="block py-4 text-white border-b border-accent">Buy Plan</a>
+      <a href="tournament.html" class="block py-4 text-white border-b border-accent">Tournaments</a>
+      <a href="profile.html" class="block py-4 text-white border-b border-accent">Profile</a>
+      <a href="login.html" class="block py-4 text-white border-b border-accent last:border-b-0">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold">Friends</h1>
+      <button class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded transition-colors" onclick="addFriend()">
+        Add Friend
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Friends List -->
+      <div class="bg-surface rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Your Friends</h2>
+        <div class="space-y-3">
+          <div class="friend-item flex justify-between items-center bg-accent p-4 rounded">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">J</div>
+              <div>
+                <div class="font-medium">John Doe</div>
+                <div class="text-text-muted text-sm">Online • Playing Cyberpunk 2077</div>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="bg-primary hover:bg-primary-hover text-white px-3 py-1 rounded text-sm transition-colors" onclick="startPrivateChat('john')">
+                Chat
+              </button>
+              <button class="bg-accent hover:bg-border text-white px-3 py-1 rounded text-sm transition-colors" onclick="inviteToGame('john')">
+                Invite
+              </button>
+            </div>
+          </div>
+
+          <div class="friend-item flex justify-between items-center bg-accent p-4 rounded">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">S</div>
+              <div>
+                <div class="font-medium">Sarah Smith</div>
+                <div class="text-text-muted text-sm">Online • In Queue</div>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="bg-primary hover:bg-primary-hover text-white px-3 py-1 rounded text-sm transition-colors" onclick="startPrivateChat('sarah')">
+                Chat
+              </button>
+              <button class="bg-accent hover:bg-border text-white px-3 py-1 rounded text-sm transition-colors" onclick="inviteToGame('sarah')">
+                Invite
+              </button>
+            </div>
+          </div>
+
+          <div class="friend-item flex justify-between items-center bg-accent p-4 rounded">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-border rounded-full flex items-center justify-center text-text-muted font-bold">M</div>
+              <div>
+                <div class="font-medium">Mike Johnson</div>
+                <div class="text-text-muted text-sm">Offline • Last seen 2 hours ago</div>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="bg-border text-text-muted px-3 py-1 rounded text-sm cursor-not-allowed" disabled>
+                Chat
+              </button>
+              <button class="bg-accent hover:bg-border text-white px-3 py-1 rounded text-sm transition-colors" onclick="removeFriend('mike')">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Friend Requests -->
+      <div class="bg-surface rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Friend Requests</h2>
+        <div class="space-y-3">
+          <div class="friend-request flex justify-between items-center bg-accent p-4 rounded">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">A</div>
+              <div>
+                <div class="font-medium">Alex Chen</div>
+                <div class="text-text-muted text-sm">Sent you a friend request</div>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="bg-primary hover:bg-primary-hover text-white px-3 py-1 rounded text-sm transition-colors" onclick="acceptRequest('alex')">
+                Accept
+              </button>
+              <button class="bg-accent hover:bg-border text-white px-3 py-1 rounded text-sm transition-colors" onclick="declineRequest('alex')">
+                Decline
+              </button>
+            </div>
+          </div>
+
+          <div class="friend-request flex justify-between items-center bg-accent p-4 rounded">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">R</div>
+              <div>
+                <div class="font-medium">Rachel Kim</div>
+                <div class="text-text-muted text-sm">Sent you a friend request</div>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="bg-primary hover:bg-primary-hover text-white px-3 py-1 rounded text-sm transition-colors" onclick="acceptRequest('rachel')">
+                Accept
+              </button>
+              <button class="bg-accent hover:bg-border text-white px-3 py-1 rounded text-sm transition-colors" onclick="declineRequest('rachel')">
+                Decline
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold mb-3">Add Friend</h3>
+          <div class="flex gap-2">
+            <input
+              type="text"
+              class="flex-1 bg-accent border border-border rounded px-3 py-2 text-white placeholder-text-muted focus:outline-none focus:border-primary"
+              placeholder="Enter username or email"
+              id="friend-username"
+            >
+            <button class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded transition-colors" onclick="sendFriendRequest()">
+              Send Request
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    function addFriend() {
+      document.getElementById('friend-username').focus();
+    }
+
+    function startPrivateChat(username) {
+      // In a real app, this would create or open a private chat with this user
+      alert(`Starting private chat with ${username}`);
+      window.location.href = 'chat.html';
+    }
+
+    function inviteToGame(username) {
+      // In a real app, this would send a game invitation
+      alert(`Game invitation sent to ${username}`);
+    }
+
+    function removeFriend(username) {
+      if (confirm(`Remove ${username} from friends?`)) {
+        // In a real app, this would remove the friend
+        alert(`${username} removed from friends`);
+        location.reload();
+      }
+    }
+
+    function acceptRequest(username) {
+      // In a real app, this would accept the friend request
+      alert(`Friend request from ${username} accepted`);
+      location.reload();
+    }
+
+    function declineRequest(username) {
+      if (confirm(`Decline friend request from ${username}?`)) {
+        // In a real app, this would decline the friend request
+        alert(`Friend request from ${username} declined`);
+        location.reload();
+      }
+    }
+
+    function sendFriendRequest() {
+      const username = document.getElementById('friend-username').value;
+      if (username.trim()) {
+        // In a real app, this would send a friend request
+        alert(`Friend request sent to ${username}`);
+        document.getElementById('friend-username').value = '';
+      }
+    }
+  </script>
+</body>
+</html>

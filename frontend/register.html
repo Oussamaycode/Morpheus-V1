@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Morpheus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#76b900',
+            'primary-hover': '#5aa700',
+            background: '#0f0f0f',
+            surface: '#1a1a1a',
+            accent: '#2a2a2a',
+            border: '#404040',
+            'text-muted': '#b0b0b0'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-white min-h-screen">
+  <div class="min-h-screen flex items-center justify-center p-4">
+    <div class="bg-surface rounded shadow-lg p-8 w-full max-w-md">
+      <h1 class="text-2xl font-bold text-center mb-6">Create Account</h1>
+      
+      <form id="registerForm">
+        <div class="mb-4">
+          <label class="block mb-2 font-medium text-sm" for="name">Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            class="w-full p-3 border border-border rounded bg-surface text-white focus:outline-none focus:border-primary" 
+            placeholder="John Doe"
+            required
+          >
+        </div>
+        
+        <div class="mb-4">
+          <label class="block mb-2 font-medium text-sm" for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            class="w-full p-3 border border-border rounded bg-surface text-white focus:outline-none focus:border-primary" 
+            placeholder="your@email.com"
+            required
+          >
+        </div>
+        
+        <div class="mb-4">
+          <label class="block mb-2 font-medium text-sm" for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            class="w-full p-3 border border-border rounded bg-surface text-white focus:outline-none focus:border-primary" 
+            placeholder="Create a password"
+            required
+          >
+        </div>
+        
+        <div class="mb-4">
+          <label class="block mb-2 font-medium text-sm" for="confirm-password">Confirm Password</label>
+          <input 
+            type="password" 
+            id="password_confirmation" 
+            class="w-full p-3 border border-border rounded bg-surface text-white focus:outline-none focus:border-primary" 
+            placeholder="Confirm your password"
+            required
+          >
+        </div>
+        
+        <button id="submit" type="submit" class="bg-primary text-white py-3 px-6 rounded hover:bg-primary-hover transition-colors duration-200 w-full text-lg">
+          Register
+        </button>
+      </form>
+      
+      <div class="text-center mt-4 text-sm text-text-muted">
+        Already have an account? <a href="login.html" class="hover:text-primary">Login</a>
+      </div>
+    </div>
+  </div>
+<script src="js/register.js"></script>
+</body>
+</html>

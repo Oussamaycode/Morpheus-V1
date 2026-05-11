@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\User;
+use App\Models\VirtualMachine;
+use Illuminate\Auth\Access\Response;
+
+class VirtualMachinePolicy
+{
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny(User $user): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, VirtualMachine $virtualMachine): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user, VirtualMachine $virtualMachine): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, VirtualMachine $virtualMachine): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, VirtualMachine $virtualMachine): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, VirtualMachine $virtualMachine): bool
+    {
+        return false;
+    }
+
+    public function turnOn(User $user,VirtualMachine $virtualMachine){
+
+        if ($user->role==='admin' || $virtualMachine->user_id===$user->id ){
+            return true;
+        }
+
+        return false;
+    }
+
+    public function turnOff(User $user,VirtualMachine $virtualMachine){
+
+        if ($user->role==='admin' || $virtualMachine->user_id==$user->id ){
+            return true;
+        }
+
+        return false;
+    }
+}

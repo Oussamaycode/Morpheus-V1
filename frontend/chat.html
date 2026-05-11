@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat - Morpheus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#76b900',
+            'primary-hover': '#5aa700',
+            background: '#0f0f0f',
+            surface: '#1a1a1a',
+            accent: '#2a2a2a',
+            border: '#404040',
+            'text-muted': '#b0b0b0'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-white min-h-screen">
+  <!-- Navbar -->
+  <nav class="bg-surface border-b border-accent py-4 sticky top-0 z-10">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
+      <a href="index.html" class="text-xl font-bold text-primary">Morpheus</a>
+      
+      <ul class="hidden md:flex gap-6 list-none">
+        <li><a href="index.html" class="text-white font-medium hover:text-primary">Home</a></li>
+        <li><a href="games.html" class="text-white font-medium hover:text-primary">Games</a></li>
+        <li><a href="chat.html" class="text-white font-medium hover:text-primary">Chat</a></li>
+        <li><a href="friends.html" class="text-white font-medium hover:text-primary">Friends</a></li>
+        <li><a href="buy-plan.html" class="text-white font-medium hover:text-primary">Buy Plan</a></li>
+        <li><a href="tournament.html" class="text-white font-medium hover:text-primary">Tournaments</a></li>
+        <li><a href="profile.html" class="text-white font-medium hover:text-primary">Profile</a></li>
+        <li><a href="login.html" class="text-white font-medium hover:text-primary">Logout</a></li>
+      </ul>
+      
+      <div class="flex flex-col gap-1 cursor-pointer p-2 md:hidden" onclick="toggleMenu()">
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+      </div>
+    </div>
+    
+    <div class="hidden absolute top-full left-0 right-0 bg-surface border-b border-accent py-4" id="mobile-menu">
+      <a href="index.html" class="block py-4 text-white border-b border-accent">Home</a>
+      <a href="games.html" class="block py-4 text-white border-b border-accent">Games</a>
+      <a href="queue.html" class="block py-4 text-white border-b border-accent">Queue</a>
+      <a href="chat.html" class="block py-4 text-white border-b border-accent">Chat</a>
+      <a href="friends.html" class="block py-4 text-white border-b border-accent">Friends</a>
+      <a href="buy-plan.html" class="block py-4 text-white border-b border-accent">Buy Plan</a>
+      <a href="tournament.html" class="block py-4 text-white border-b border-accent">Tournaments</a>
+      <a href="profile.html" class="block py-4 text-white border-b border-accent">Profile</a>
+      <a href="login.html" class="block py-4 text-white border-b border-accent last:border-b-0">Logout</a>
+    </div>
+  </nav>
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Messages</h1>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Conversations List -->
+      <div class="lg:col-span-1 bg-surface rounded-lg p-4">
+        <div class="mb-4">
+          <h2 class="text-xl font-semibold mb-4">Global Chat</h2>
+          <div class="conversation-item bg-accent p-3 rounded cursor-pointer hover:bg-border transition-colors" onclick="openGlobalChat()">
+            <div class="font-medium">Global Gaming Chat</div>
+            <div class="text-text-muted text-sm">Join the community discussion</div>
+          </div>
+        </div>
+        
+        <div class="mb-4">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">Private Chats</h2>
+            <button class="bg-primary hover:bg-primary-hover text-white px-3 py-1 rounded text-sm" onclick="createPrivateChat()">+ New</button>
+          </div>
+          <div id="private-chats">
+            <div class="conversation-item bg-accent p-3 rounded cursor-pointer hover:bg-border transition-colors" onclick="openChat('support')">
+              <div class="font-medium">Morpheus Support</div>
+              <div class="text-text-muted text-sm">How can we help you today?</div>
+            </div>
+            
+            <div class="conversation-item bg-accent p-3 rounded cursor-pointer hover:bg-border transition-colors" onclick="openChat('john')">
+              <div class="font-medium">John Doe</div>
+              <div class="text-text-muted text-sm">Want to play later?</div>
+            </div>
+            
+            <div class="conversation-item bg-accent p-3 rounded cursor-pointer hover:bg-border transition-colors" onclick="openChat('sarah')">
+              <div class="font-medium">Sarah Smith</div>
+              <div class="text-text-muted text-sm">Thanks for the game!</div>
+            </div>
+            
+            <div class="conversation-item bg-accent p-3 rounded cursor-pointer hover:bg-border transition-colors" onclick="openChat('mike')">
+              <div class="font-medium">Mike Johnson</div>
+              <div class="text-text-muted text-sm">Check out this new game</div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <a href="friends.html" class="bg-accent hover:bg-border text-white px-4 py-2 rounded block text-center transition-colors">Manage Friends</a>
+        </div>
+      </div>
+      
+      <!-- Messages Area -->
+      <div class="lg:col-span-2 bg-surface rounded-lg overflow-hidden">
+        <div class="messages-header bg-accent p-4 border-b border-border">
+          <button class="back-btn text-white hover:text-primary mr-4" onclick="closeChat()">←</button>
+          <div>
+            <div class="font-semibold text-lg">Morpheus Support</div>
+            <div class="text-text-muted text-sm">Online</div>
+          </div>
+        </div>
+        
+        <div class="messages-list p-4 space-y-4 max-h-96 overflow-y-auto">
+          <div class="message received bg-accent p-3 rounded-lg max-w-xs">
+            Hello! How can we help you today?
+          </div>
+          <div class="message sent bg-primary p-3 rounded-lg max-w-xs ml-auto text-right">
+            Hi, I'm having trouble connecting to a game.
+          </div>
+          <div class="message received bg-accent p-3 rounded-lg max-w-xs">
+            Sorry to hear that. Can you tell me which game you're trying to play?
+          </div>
+          <div class="message sent bg-primary p-3 rounded-lg max-w-xs ml-auto text-right">
+            Cyberpunk 2077
+          </div>
+          <div class="message received bg-accent p-3 rounded-lg max-w-xs">
+            Let me check that for you. One moment please.
+          </div>
+        </div>
+        
+        <div class="message-input-area p-4 border-t border-border">
+          <div class="flex gap-2">
+            <input 
+              type="text" 
+              class="message-input flex-1 bg-accent border border-border rounded px-3 py-2 text-white placeholder-text-muted focus:outline-none focus:border-primary"
+              placeholder="Type a message..."
+            >
+            <button class="bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded transition-colors">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+    
+    function openGlobalChat() {
+      // In a real app, this would open the global chat
+      alert('Global chat feature coming soon!');
+    }
+    
+    function createPrivateChat() {
+      // In a real app, this would open a friend selector to create a private chat
+      alert('Create private chat feature - select friends from friends page!');
+    }
+    
+    function openChat(user) {
+      document.getElementById('messages-area').classList.add('active');
+      // In a real app, you would load the conversation for this user
+    }
+    
+    function closeChat() {
+      document.getElementById('messages-area').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

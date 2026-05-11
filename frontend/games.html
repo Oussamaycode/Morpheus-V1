@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games - Morpheus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#76b900',
+            'primary-hover': '#5aa700',
+            background: '#0f0f0f',
+            surface: '#1a1a1a',
+            accent: '#2a2a2a',
+            border: '#404040',
+            'text-muted': '#b0b0b0'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-white min-h-screen">
+  <!-- Navbar -->
+  <nav class="bg-surface border-b border-accent py-4 sticky top-0 z-10">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
+      <a href="index.html" class="text-xl font-bold text-primary">Morpheus</a>
+      
+      <ul class="hidden md:flex gap-6 list-none">
+        <li><a href="index.html" class="text-white font-medium hover:text-primary">Home</a></li>
+        <li><a href="games.html" class="text-white font-medium hover:text-primary">Games</a></li>
+        <li><a href="chat.html" class="text-white font-medium hover:text-primary">Chat</a></li>
+        <li><a href="friends.html" class="text-white font-medium hover:text-primary">Friends</a></li>
+        <li><a href="buy-plan.html" class="text-white font-medium hover:text-primary">Buy Plan</a></li>
+        <li><a href="tournament.html" class="text-white font-medium hover:text-primary">Tournaments</a></li>
+        <li><a href="profile.html" class="text-white font-medium hover:text-primary">Profile</a></li>
+        <li><a href="login.html" class="text-white font-medium hover:text-primary">Logout</a></li>
+      </ul>
+      
+      <div class="flex flex-col gap-1 cursor-pointer p-2 md:hidden" onclick="toggleMenu()">
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+      </div>
+    </div>
+    
+    <div class="hidden absolute top-full left-0 right-0 bg-surface border-b border-accent py-4" id="mobile-menu">
+      <a href="index.html" class="block py-4 text-white border-b border-accent">Home</a>
+      <a href="games.html" class="block py-4 text-white border-b border-accent">Games</a>
+      <a href="queue.html" class="block py-4 text-white border-b border-accent">Queue</a>
+      <a href="chat.html" class="block py-4 text-white border-b border-accent">Chat</a>
+      <a href="friends.html" class="block py-4 text-white border-b border-accent">Friends</a>
+      <a href="buy-plan.html" class="block py-4 text-white border-b border-accent">Buy Plan</a>
+      <a href="tournament.html" class="block py-4 text-white border-b border-accent">Tournaments</a>
+      <a href="profile.html" class="block py-4 text-white border-b border-accent">Profile</a>
+      <a href="login.html" class="block py-4 text-white border-b border-accent last:border-b-0">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="py-6">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="text-2xl font-bold mb-6 text-white">Games Library</h1>
+      
+      <!-- Games Grid -->
+      <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    
+        
+      
+        
+        
+      </div>
+    </div>
+  </main>
+
+  <script src="js/games.js">
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>

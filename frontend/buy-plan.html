@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Plan - Morpheus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#76b900',
+            'primary-hover': '#5aa700',
+            background: '#0f0f0f',
+            surface: '#1a1a1a',
+            accent: '#2a2a2a',
+            border: '#404040',
+            'text-muted': '#b0b0b0'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-white min-h-screen">
+  <!-- Navbar -->
+  <nav class="bg-surface border-b border-accent py-4 sticky top-0 z-10">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
+      <a href="index.html" class="text-xl font-bold text-primary">Morpheus</a>
+
+      <ul class="hidden md:flex gap-6 list-none">
+        <li><a href="index.html" class="text-white font-medium hover:text-primary">Home</a></li>
+        <li><a href="games.html" class="text-white font-medium hover:text-primary">Games</a></li>
+        <li><a href="queue.html" class="text-white font-medium hover:text-primary">Queue</a></li>
+        <li><a href="chat.html" class="text-white font-medium hover:text-primary">Chat</a></li>
+        <li><a href="friends.html" class="text-white font-medium hover:text-primary">Friends</a></li>
+        <li><a href="tournament.html" class="text-white font-medium hover:text-primary">Tournaments</a></li>
+        <li><a href="profile.html" class="text-white font-medium hover:text-primary">Profile</a></li>
+        <li><a href="login.html" class="text-white font-medium hover:text-primary">Logout</a></li>
+      </ul>
+
+      <div class="flex flex-col gap-1 cursor-pointer p-2 md:hidden" onclick="toggleMenu()">
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+      </div>
+    </div>
+
+    <div class="hidden absolute top-full left-0 right-0 bg-surface border-b border-accent py-4" id="mobile-menu">
+      <a href="index.html" class="block py-4 text-white border-b border-accent">Home</a>
+      <a href="games.html" class="block py-4 text-white border-b border-accent">Games</a>
+      <a href="chat.html" class="block py-4 text-white border-b border-accent">Chat</a>
+      <a href="friends.html" class="block py-4 text-white border-b border-accent">Friends</a>
+      <a href="tournament.html" class="block py-4 text-white border-b border-accent">Tournaments</a>
+      <a href="profile.html" class="block py-4 text-white border-b border-accent">Profile</a>
+      <a href="login.html" class="block py-4 text-white border-b border-accent last:border-b-0">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4">Choose Your Plan</h1>
+      <p class="text-text-muted text-lg">Unlock unlimited gaming with our premium plans</p>
+    </div>
+
+    <div id="plans-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+  
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="bg-surface rounded-lg p-8">
+      <h2 class="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-2">Can I cancel anytime?</h3>
+          <p class="text-text-muted">Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period.</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2">Do I need a powerful PC?</h3>
+          <p class="text-text-muted">No! Morpheus streams games from our powerful servers, so you can play on any device with a good internet connection.</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2">What internet speed do I need?</h3>
+          <p class="text-text-muted">For 1080p streaming, we recommend 15 Mbps. For 4K streaming (Ultimate plan), we recommend 50 Mbps or higher.</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-2">Can I play on multiple devices?</h3>
+          <p class="text-text-muted">Yes, you can switch between devices seamlessly. Your game progress is saved in the cloud.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/buy-plan.js">
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    function selectPlan(plan) {
+      // In a real app, this would redirect to payment processing
+      alert(`Redirecting to payment for ${plan} plan...`);
+      // window.location.href = `payment.html?plan=${plan}`;
+    }
+  </script>
+</body>
+</html>

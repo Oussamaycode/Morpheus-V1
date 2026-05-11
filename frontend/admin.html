@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Morpheus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#76b900',
+            'primary-hover': '#5aa700',
+            background: '#0f0f0f',
+            surface: '#1a1a1a',
+            accent: '#2a2a2a',
+            border: '#404040',
+            'text-muted': '#b0b0b0'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-white min-h-screen">
+  <!-- Navbar -->
+  <nav class="bg-surface border-b border-accent py-4 sticky top-0 z-10">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4">
+      <a href="index.html" class="text-xl font-bold text-primary">Morpheus</a>
+      
+      <ul class="hidden md:flex gap-6 list-none">
+        <li><a href="index.html" class="text-white font-medium hover:text-primary">Home</a></li>
+        <li><a href="games.html" class="text-white font-medium hover:text-primary">Games</a></li>
+        <li><a href="chat.html" class="text-white font-medium hover:text-primary">Chat</a></li>
+        <li><a href="friends.html" class="text-white font-medium hover:text-primary">Friends</a></li>
+        <li><a href="buy-plan.html" class="text-white font-medium hover:text-primary">Buy Plan</a></li>
+        <li><a href="tournament.html" class="text-white font-medium hover:text-primary">Tournaments</a></li>
+        <li><a href="profile.html" class="text-white font-medium hover:text-primary">Profile</a></li>
+        <li><a href="login.html" class="text-white font-medium hover:text-primary">Logout</a></li>
+      </ul>
+      
+      <div class="flex flex-col gap-1 cursor-pointer p-2 md:hidden" onclick="toggleMenu()">
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+        <span class="w-6 h-0.5 bg-white rounded"></span>
+      </div>
+    </div>
+    
+    <div class="hidden absolute top-full left-0 right-0 bg-surface border-b border-accent py-4" id="mobile-menu">
+      <a href="index.html" class="block py-4 text-white border-b border-accent">Home</a>
+      <a href="games.html" class="block py-4 text-white border-b border-accent">Games</a>
+      <a href="queue.html" class="block py-4 text-white border-b border-accent">Queue</a>
+      <a href="chat.html" class="block py-4 text-white border-b border-accent">Chat</a>
+      <a href="friends.html" class="block py-4 text-white border-b border-accent">Friends</a>
+      <a href="buy-plan.html" class="block py-4 text-white border-b border-accent">Buy Plan</a>
+      <a href="tournament.html" class="block py-4 text-white border-b border-accent">Tournaments</a>
+      <a href="profile.html" class="block py-4 text-white border-b border-accent">Profile</a>
+      <a href="login.html" class="block py-4 text-white border-b border-accent last:border-b-0">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="py-6">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
+      
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div class="bg-surface rounded shadow-lg p-6 text-center">
+          <div class="text-text-muted text-sm">Total Users</div>
+          <div class="text-3xl font-bold">1,234</div>
+        </div>
+        <div class="bg-surface rounded shadow-lg p-6 text-center">
+          <div class="text-text-muted text-sm">Active Sessions</div>
+          <div class="text-3xl font-bold">56</div>
+        </div>
+        <div class="bg-surface rounded shadow-lg p-6 text-center">
+          <div class="text-text-muted text-sm">In Queue</div>
+          <div class="text-3xl font-bold">23</div>
+        </div>
+      </div>
+      
+      <!-- Users Table -->
+      <div class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">Users</h2>
+        <div id="users-loading" class="text-text-muted text-sm py-4">Loading users...</div>
+        <div id="users-error" class="hidden text-red-400 text-sm py-4"></div>
+        <div id="users-empty" class="hidden text-text-muted text-sm py-4">No users found.</div>
+        <div class="overflow-x-auto hidden" id="users-table-wrapper">
+          <table class="w-full border-collapse bg-surface rounded overflow-hidden">
+            <thead>
+              <tr class="bg-accent">
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">ID</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Name</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Email</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Status</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      
+
+
+      <!-- Active Sessions Table -->
+      <div class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">Active Sessions</h2>
+        <div id="sessions-loading" class="text-text-muted text-sm py-4">Loading sessions...</div>
+        <div id="sessions-error" class="hidden text-red-400 text-sm py-4"></div>
+        <div id="sessions-empty" class="hidden text-text-muted text-sm py-4">No active sessions.</div>
+        <div class="overflow-x-auto hidden" id="sessions-table-wrapper">
+          <table class="w-full border-collapse bg-surface rounded overflow-hidden">
+            <thead>
+              <tr class="bg-accent">
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">ID</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">User</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Game</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Started At</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Status</th>
+              </tr>
+            </thead>
+            <tbody id="sessions-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tournament Management -->
+      <div class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">Tournament Management</h2>
+        <div class="bg-surface rounded shadow-lg p-6">
+          <div class="flex flex-col gap-4">
+            <button onclick="toggleTournamentForm()" class="self-start bg-primary hover:bg-primary-hover text-white px-5 py-3 rounded transition-colors">Create Tournament</button>
+
+            <form id="tournament-form" class="hidden bg-background/50 border border-border rounded-lg p-6 space-y-4" onsubmit="createAdminTournament(event)">
+              <div>
+                <label class="block text-sm text-text-muted mb-2" for="tournament-name">Tournament Name</label>
+                <input id="tournament-name" type="text" required class="w-full rounded bg-surface border border-border px-4 py-3 text-white outline-none focus:border-primary" placeholder="e.g. Summer Championship" />
+              </div>
+              <div>
+                <label class="block text-sm text-text-muted mb-2" for="tournament-game">Game</label>
+                <select id="tournament-game" required class="w-full rounded bg-surface border border-border px-4 py-3 text-white outline-none focus:border-primary">
+                  <option value="" disabled selected>Select a game</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm text-text-muted mb-2" for="tournament-start">Start Date</label>
+                <input id="tournament-start" type="datetime-local" required class="w-full rounded bg-surface border border-border px-4 py-3 text-white outline-none focus:border-primary" />
+              </div>
+              <div id="tournament-form-error" class="hidden text-red-400 text-sm"></div>
+              <div class="flex justify-end gap-3">
+                <button type="button" onclick="toggleTournamentForm()" class="bg-accent hover:bg-border text-white px-5 py-3 rounded transition-colors">Cancel</button>
+                <button type="submit" id="tournament-submit-btn" class="bg-primary hover:bg-primary-hover text-white px-5 py-3 rounded transition-colors">Save Tournament</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tournaments List -->
+      <div class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">All Tournaments</h2>
+        <div id="tournaments-loading" class="text-text-muted text-sm py-4">Loading tournaments...</div>
+        <div id="tournaments-error" class="hidden text-red-400 text-sm py-4"></div>
+        <div class="overflow-x-auto hidden" id="tournaments-table-wrapper">
+          <table class="w-full border-collapse bg-surface rounded overflow-hidden">
+            <thead>
+              <tr class="bg-accent">
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">ID</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Name</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Game</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Start Date</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Status</th>
+                <th class="p-4 text-left font-semibold text-sm text-text-muted">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tournaments-tbody">
+            </tbody>
+          </table>
+        </div>
+        <div id="tournaments-empty" class="hidden text-text-muted text-sm py-4">No tournaments found.</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
